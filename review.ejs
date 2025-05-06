@@ -81,6 +81,19 @@
     font-style: italic;
     color: #aaa;
   }
+
+  .login-message {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .login-message a {
+    color: #61dafb;
+    text-decoration: underline;
+  }
  </style>
 </head>
 <body>
@@ -126,18 +139,75 @@
        <p class="no-comments">No comments yet. Be the first to comment!</p>
      <% } %>
      
-     <!-- Yorum Ekleme Formu -->
-     <form class="comment-form" action="/comments" method="POST">
-       <input type="hidden" name="reviewId" value="<%= review.id %>">
-       <input type="text" name="username" placeholder="Your Name" required>
-       <textarea name="comment" placeholder="Your Comment" required></textarea>
-       <button type="submit">Post Comment</button>
-     </form>
+     <!-- Yorum Ekleme Formu - Conditional rendering based on login status -->
+     <div id="comment-form-container">
+       <!-- This will be populated by JavaScript based on login status -->
+     </div>
    </div>
  </div>
  <footer>
    <p>© 2023 Book Review. All rights reserved. Mayank Pant</p>
  </footer>
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const commentFormContainer = document.getElementById('comment-form-container');
+    const reviewId = <%= review.id %>;
+    
+    // Check if user is logged in
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    
+    if (user) {
+      // User is logged in - show comment form without username field
+      commentFormContainer.innerHTML = `
+        <form class="comment-form" id="comment-form">
+          <input type="hidden" name="reviewId" value="${reviewId}">
+          <input type="hidden" id="username" name="username" value="${user.username}">
+          <textarea name="comment" id="comment" placeholder="Your Comment" required></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+      `;
+      
+      // Add event listener to the form
+      document.getElementById('comment-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+          reviewId: reviewId,
+          username: user.username,
+          comment: document.getElementById('comment').value
+        };
+        
+        try {
+          const response = await fetch('/comments', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+            credentials: 'include'
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to post comment');
+          }
+          
+          // Reload the page to show the new comment
+          window.location.reload();
+        } catch (error) {
+          console.error('Error posting comment:', error);
+          alert('Failed to post comment. Please try again.');
+        }
+      });
+    } else {
+      // User is not logged in - show login message
+      commentFormContainer.innerHTML = `
+        <div class="login-message">
+          <p>Please <a href="/auth.html">login or register</a> to post a comment.</p>
+        </div>
+      `;
+    }
+  });
+ </script>
  <script src="/scripts.js"></script>
 </body>
 </html>

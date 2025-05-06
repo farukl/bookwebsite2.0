@@ -1,0 +1,334 @@
+/* Global Styles */
+body {
+    margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #090707;
+}
+
+/* Navbar Styles */
+nav {
+    position: relative; /* Ensure the navbar is the positioning context */
+}
+nav {
+    height: 62px;
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Handle smaller screens */
+}
+
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    display: block;
+    text-align: center;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    border: 1px solid transparent; /* Add border */
+    font-size: 23px; /* Adjust the size as needed */
+}
+
+
+nav ul li a:hover {
+    background-color: #575757;
+    border-color: white; /* Change border color on hover */
+}
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        width: 100%; /* Full width for each link */
+    }
+}
+
+/* Form Styles */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    display: block;
+}
+
+form input,
+form textarea {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #575757;
+}
+
+/* Search Bar */
+#searchInput {
+    width: 80%;
+    max-width: 300px; /* Adjust width to fit better in the navbar */
+    padding: 10px;
+    position: absolute; /* Use absolute positioning */
+    right: 20px; /* Position it 20px from the right */
+    top: 50%; /* Center vertically within the navbar */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Review Container */
+.review-container {
+    max-width: 600px;
+    max-height: fit-content;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Utility Class */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ... (keep existing styles) ... */
+
+/* Review Grid Styles */
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.review-tile {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.review-tile {
+    width: 200px; /* Set your desired width */
+    height: 300px; /* Set your desired height */
+    overflow: hidden; /* Ensure content doesn't overflow the tile */
+    position: relative; /* Needed for absolute positioning of image */
+}
+
+.review-tile img {
+    width: 100%; /* Makes the image take the full width of the tile */
+    height: auto; /* Adjust height automatically to maintain aspect ratio */
+    max-height: 100%; /* Ensures the image doesn't exceed the tile height */
+    object-fit: contain; /* Keeps the aspect ratio while fitting within the tile */
+    position: absolute; /* Positioning the image absolutely within the tile */
+    top: 50%; /* Center the image vertically */
+    left: 50%; /* Center the image horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+}
+
+.review-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* .review-tile img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+} */
+
+.review-tile h3 {
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Full Review Page Styles */
+.full-review {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.full-review img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.full-review h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.full-review h3 {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.full-review p {
+    color: #333;
+    line-height: 1.6;
+}
+
+.button-group {
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: #575757;
+}
+footer {
+    background-color: #181616;
+    text-align: center;
+    /* padding: 10px 0; */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+}

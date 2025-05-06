@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            border-bottom: 2px solid #61dafb;
+            color: #61dafb;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .auth-form button:hover {
+            background-color: #4fa8d8;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Submit Review</a></li>
+        </ul>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Login</div>
+            <div class="auth-tab" data-tab="register">Register</div>
+        </div>
+
+        <div class="auth-form active" id="login-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="button" id="login-button">Login</button>
+            <div class="error-message" id="login-error"></div>
+        </div>
+
+        <div class="auth-form" id="register-form">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label for="register-username">Username</label>
+                <input type="text" id="register-username" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" placeholder="Choose a password" required>
+            </div>
+            <div class="form-group">
+                <label for="register-confirm-password">Confirm Password</label>
+                <input type="password" id="register-confirm-password" placeholder="Confirm your password" required>
+            </div>
+            <button type="button" id="register-button">Register</button>
+            <div class="error-message" id="register-error"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Book Review. All rights reserved. Mayank Pant</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title><%= review.title %> - Book Review</title>
+ <link rel="stylesheet" href="styles.css">
+ <style>
+  /* Yorumlar için ek stil */
+  .comments-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+  
+  .comment {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .comment-username {
+    font-weight: bold;
+    color: #61dafb;
+  }
+  
+  .comment-date {
+    color: #aaa;
+    font-size: 0.9em;
+  }
+  
+  .comment-content {
+    line-height: 1.5;
+    color: #f5f5f5;
+  }
+  
+  .comment-form {
+    margin-top: 20px;
+  }
+  
+  .comment-form input,
+  .comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #f5f5f5;
+  }
+  
+  .comment-form textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .comment-form button {
+    background-color: #61dafb;
+    color: #282c34;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .comment-form button:hover {
+    background-color: #4fa8d8;
+  }
+  
+  .no-comments {
+    font-style: italic;
+    color: #aaa;
+  }
+ </style>
+</head>
+<body>
+ <div>
+   <div class="wave"></div>
+   <div class="wave"></div>
+   <div class="wave"></div>
+ </div>
+ <nav>
+   <ul>
+     <li><a href="/">Home</a></li>
+     <li><a href="/form.html">Submit Review</a></li>
+   </ul>
+ </nav>
+ <div class="full-review" id="fullReview">
+   <img src="<%= review.fullImage || 'default-full-image.jpg' %>" alt="<%= review.title %>" onerror="this.onerror=null;this.src='default-full-image.jpg';">
+   <h2><%= review.title %></h2>
+   <h3>by <%= review.author %></h3>
+   <p><%= review.review %></p>
+   <div class="button-group">
+     <button onclick="editReview(<%= review.id %>)">Edit</button>
+     <button onclick="deleteReview(<%= review.id %>)">Delete</button>
+   </div>
+   
+   <!-- Yorumlar Bölümü -->
+   <div class="comments-section">
+     <h3>Comments</h3>
+     <% if (comments && comments.length > 0) { %>
+       <div class="comments-list">
+         <% comments.forEach(comment => { %>
+           <div class="comment">
+             <div class="comment-header">
+               <span class="comment-username"><%= comment.username %></span>
+               <span class="comment-date"><%= new Date(comment.date).toLocaleDateString() %></span>
+             </div>
+             <div class="comment-content">
+               <%= comment.comment %>
+             </div>
+           </div>
+         <% }); %>
+       </div>
+     <% } else { %>
+       <p class="no-comments">No comments yet. Be the first to comment!</p>
+     <% } %>
+     
+     <!-- Yorum Ekleme Formu -->
+     <form class="comment-form" action="/comments" method="POST">
+       <input type="hidden" name="reviewId" value="<%= review.id %>">
+       <input type="text" name="username" placeholder="Your Name" required>
+       <textarea name="comment" placeholder="Your Comment" required></textarea>
+       <button type="submit">Post Comment</button>
+     </form>
+   </div>
+ </div>
+ <footer>
+   <p>© 2023 Book Review. All rights reserved. Mayank Pant</p>
+ </footer>
+ <script src="/scripts.js"></script>
+</body>
+</html>
